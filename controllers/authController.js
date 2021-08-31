@@ -3,13 +3,13 @@ const jwt = require('jsonwebtoken');
 const { findById } = require('../models/userModel');
 
 //handle errors
-const handleError = err => {
+const handleErrors = err => {
     console.log(err.message, err.code);
     let errors = { email: '', password: ''};
 
     //duplicate error code
     if(err.code === 11000){
-        errors[email] = 'Email already registered';
+        errors.email = 'Email already registered';
         return errors;
     }
 
@@ -20,7 +20,7 @@ const handleError = err => {
         })
     }
 
-    return error;
+    return errors;
 }
 
 const maxAge = 3 * 24 * 60 * 60;
@@ -50,8 +50,8 @@ module.exports.signup_post = async (req, res) => {
         res.status(201).json({user: user._id});
         
     } catch(err){
-        const errors = handleError(err);
-        res.status(400).json(errors);
+        const errors = handleErrors(err);
+        res.status(400).json({errors});
     }
 }
 
