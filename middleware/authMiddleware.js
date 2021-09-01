@@ -1,4 +1,5 @@
 const jwt = require('jsonwebtoken');
+const { jwtSecret } = require('../config');
 
 const requireAuth = (req, res, next) =>{
 
@@ -7,7 +8,7 @@ const requireAuth = (req, res, next) =>{
 
     //check jwt exists and is verified
     if(token){
-        jwt.verify(token, 'raphael tavares secret.', (err, decodedToken) =>{
+        jwt.verify(token, jwtSecret, (err, decodedToken) =>{
             if(err){
                 console.log(err.message);
                 res.redirect('/login');

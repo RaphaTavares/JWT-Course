@@ -4,4 +4,5 @@ const throwError = (errorMessage) =>{
 
 
 const connectionString = process.env.CONNECTION_STRING ?? throwError("Connection String not defined")
-module.exports = {connectionString};
+const jwtSecret = process.env.CONNECTION_STRING ?? throwError("JWT secret not defined")
+module.exports = {connectionString, jwtSecret};
